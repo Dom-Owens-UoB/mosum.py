@@ -6,3 +6,33 @@ This comprises the MOSUM procedure for estimating multiple mean changes from Eic
 and the multiscale algorithmic extension from Cho and Kirch (2022) <doi:10.1007/s10463-021-00811-5>, 
 as well as the bootstrap procedure for generating confidence intervals about the locations of change points as proposed in Cho and Kirch (2022) <doi:10.1016/j.csda.2022.107552>. 
 See also Meier, Kirch and Cho (2021) <doi:10.18637/jss.v097.i08> which accompanies the R package.
+
+## Installation
+
+```bash
+$ pip install mosum
+```
+
+## Usage
+
+mosum.py can be used as follows to detect changes in the mean of a time series
+
+```python
+import mosum
+#   simulate data
+xx = mosum.testData("blocks")["x"]
+# detect changes
+xx_m  = mosum.mosum(xx, G = 50, criterion = "eta", boundary_extension = True)
+# summary and print methods
+xx_m.summary()
+xx_m.print()
+# plot the output
+xx_m.plot(display="mosum")
+from matplotlib import pyplot as plt
+plt.show()
+```
+
+## License
+
+mosum.py was created by Dom Owens, based on the R package "mosum", originally by Alexander Meier, Haeran Cho, and Claudia Kirch.
+It is licensed under the terms of the MIT license.

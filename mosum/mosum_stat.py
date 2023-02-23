@@ -3,9 +3,9 @@ from typing import Union, Any
 import numpy as np
 import math
 import sys
-
 import pandas as pd
 
+import warnings
 
 class mosum_stat_obj:
     """mosum statistic"""
@@ -28,13 +28,13 @@ def mosum_stat(x, G, G_right=float("nan"), var_est_method='mosum', var_custom=No
     symmetric = np.isnan(G_right)
     abs_bandwidth: Union[bool, Any] = (G >= 1)
     if not abs_bandwidth:
-        G = np.floor(n * G)
-        if not symmetric: G_right = np.floor(n * G_right)
-    if G < 1 & G >= 0.5: sys.exit("Please use relative bandwidth between 0 and 0.5.")
+        G = int(np.floor(n * G))
+        if not symmetric: G_right = int(np.floor(n * G_right))
+    if (G < 1) & (G >= 0.5): sys.exit("Please use relative bandwidth between 0 and 0.5.")
     if G >= n / 2: sys.exit("Please use bandwidth smaller than n/2.")
     if not symmetric:
-        if (G.right < 1 & G.right >= 0.5): sys.exit("Please use relative bandwidth between 0 and 0.5.")
-        if (G.right >= n / 2): sys.exit("Please use bandwidth smaller than n/2.")
+        if (G_right < 1) & (G_right >= 0.5): sys.exit("Please use relative bandwidth between 0 and 0.5.")
+        if (G_right >= n / 2): sys.exit("Please use bandwidth smaller than n/2.")
 
     #consistency checks on input
     if len(x.shape) > 1: sys.exit(1)
@@ -78,7 +78,7 @@ def mosum_stat(x, G, G_right=float("nan"), var_est_method='mosum', var_custom=No
         else:
             summedSquares_right =  rolling_sum(x ** 2, G_right) #np.array(pd.Series(x**2).rolling(G_right).sum()[G_right:])
             squaredSums_right = sums_right ** 2
-            var_tmp_right = summedSquares_right[:n - G_right] - 1 / G_right * (squaredSums_right[:n - G_right])
+            var_tmp_right = summedSquares_right[:n - G_right+1] - 1 / G_right * (squaredSums_right[:n - G_right+1])
         var_right = np.concatenate( (var_tmp_right[1: n - G_right +2], np.full(G_right, float("nan"))), axis=None ) / G_right #shifted
         if var_est_method == 'mosum':
             var = (var_left + var_right) / 2
@@ -102,9 +102,11 @@ def mosum_stat(x, G, G_right=float("nan"), var_est_method='mosum', var_custom=No
             unscaledStatistic[:G_left] = np.cumsum(np.mean(x[:G_left + G_right]) - x[:G_left]) * weights_left
             var_estimation[:G_left] = var_estimation[G_left-1]
         if n > 2 * G_right:
-            weights_right = np.sqrt( (G_left+G_right) / np.flip(np.arange(0,G_right)) / (np.arange(G_left + 1, G_left + G_right+1)) )
-            xrev: float = x[n - G_left - G_right:]
-            unscaledStatistic[n - G_right:] = np.delete(np.cumsum(np.mean(xrev) - xrev),np.arange(0,G_left)) * weights_right
+            with warnings.catch_warnings(): # zero-div handling
+                warnings.simplefilter("ignore")
+                weights_right = np.sqrt( (G_left+G_right) / np.flip(np.arange(0,G_right)) / (np.arange(G_left + 1, G_left + G_right+1)) )
+                xrev: float = x[n - G_left - G_right:]
+                unscaledStatistic[n - G_right:] = np.delete(np.cumsum(np.mean(xrev) - xrev),np.arange(0,G_left)) * weights_right
             unscaledStatistic[n-1] = 0
             var_estimation[n - G_right:] = var_estimation[n - G_right-1]
     res = np.absolute(unscaledStatistic) / np.sqrt(var_estimation)
@@ -133,8 +135,8 @@ def eta_criterion_help(candidates: int, m_values: float, eta: float, G_left: int
     for jj in np.arange(len(candidates)):
         k_star = candidates[jj];
         m_star = m_values[k_star];
-        left_thresh = np.concatenate((1, k_star-left_length), axis=None).max() - 1
-        right_thresh = np.concatenate((n, k_star+right_length), axis=None).min() - 1
-        if m_star == m_values[left_thresh:right_thresh].max():
+        left_thresh = np.concatenate((0, k_star-left_length), axis=None).max()
+        right_thresh = np.concatenate((n, k_star+right_length+1), axis=None).min()
+        if m_star == max(m_values[left_thresh:right_thresh]):
             res = np.append(res, k_star)
     return res

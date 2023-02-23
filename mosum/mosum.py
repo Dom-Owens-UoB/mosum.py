@@ -1,14 +1,11 @@
-r"""MOSUM"""
+import mosum
 import numpy as np
 import pandas as pd
 import sys
 from matplotlib import pyplot as plt
 
-# from mosum_test import criticalValue
-#from mosum_stat import mosum_stat
-#from mosum_stat import eta_criterion_help
-import mosum_stat as m_s
-import mosum_test
+from mosum.mosum_test import criticalValue, pValue
+from mosum.mosum_stat import mosum_stat, eta_criterion_help
 
 
 class mosum_obj:
@@ -43,11 +40,6 @@ class mosum_obj:
     def plot(self, display=['data', 'mosum'][0], cpts_col='red', critical_value_col='blue', xlab='Time'):
         """plot method - plots data or detector"""
         plt.clf()
-    #     if (is(self.x, 'ts'))
-    #        x_plot <- as.numeric(time(self.x))
-    #    elif(is(self.x, 'timeSeries'))
-    #        x_plot <- time(self.x)
-    #    else:
         x_plot = np.arange(0,len(self.x))
         if (display == 'mosum'):
             plt.plot(x_plot, self.stat, ls='-', color="black")
@@ -66,7 +58,7 @@ class mosum_obj:
             plt.title("v")
             plt.plot(x_plot, fhat, color = 'darkgray', ls = '-', lw = 2)
         for p in self.cpts:
-            plt.axvline(x_plot[np.int(p-1)]+1, color='red')
+            plt.axvline(x_plot[(p-1)]+1, color='red')
 
 
     def summary(self):
@@ -76,9 +68,6 @@ class mosum_obj:
             ans = self.cpts_info
             ans.p_value = round(ans.p_value, 3)
             ans.jump = round(ans.jump, 3)
-        # if (self.do.confint): ans = pd.DataFrame(ans, self.ci$CI[, -1, drop=FALSE])
-
-        #  cat(paste('created using mosum version ', utils::packageVersion('mosum'), sep=''))
         out = 'change points detected at alpha = ' + str(self.alpha) + ' according to ' + self.criterion + '-criterion'
         if (self.criterion == 'eta'): out = out + ' with eta = ' + str(self.eta)
         if (self.criterion == 'epsilon'): out = out + ' with epsilon = ' + str(self.epsilon)
@@ -91,7 +80,6 @@ class mosum_obj:
 
     def print(self):
         """print method"""
-        #  cat(paste('created using mosum version ', utils::packageVersion('mosum'), sep=''))
         n = len(self.x)
         if (len(self.cpts) > 0):
             ans = self.cpts_info
@@ -197,11 +185,18 @@ def mosum(x, G, G_right=float("nan"), var_est_method=['mosum', 'mosum_min', 'mos
     ci
         confidence intervals
 
+    Examples
+    --------
+    >>> import mosum
+    >>> xx = mosum.testData("blocks")["x"]
+    >>> xx_m  = mosum.mosum(xx, G = 50, criterion = "eta", boundary_extension = True)
+    >>> xx_m.summary()
+    >>> xx_m.print()
     """
     # consistency checks on input
 
     n = x.shape[0]
-    m = m_s.mosum_stat(x, G, G_right, var_est_method, var_custom, boundary_extension)
+    m = mosum_stat(x, G, G_right, var_est_method, var_custom, boundary_extension)
 
     G_left = m.G_left
     G_right = m.G_right
@@ -211,7 +206,7 @@ def mosum(x, G, G_right=float("nan"), var_est_method=['mosum', 'mosum_min', 'mos
     changePoints = np.array([])
 
     if threshold == 'critical_value':
-        threshold_val = mosum_test.criticalValue(n, G_left, G_right, alpha)
+        threshold_val = criticalValue(n, G_left, G_right, alpha)
     elif threshold == 'custom':
         threshold_val = threshold_custom
     else:
@@ -228,24 +223,24 @@ def mosum(x, G, G_right=float("nan"), var_est_method=['mosum', 'mosum_min', 'mos
         exceedingsCount = np.array(exceedings * pd.Series(ex_len.groupby(ex_len).cumcount().add(1)))
         # get exceeding-intervals of fitting length
         minIntervalSize = max([1, (G_min + G_max) / 2 * epsilon])
-        intervalEndPoints = np.array(np.where(np.diff(exceedingsCount) <= -minIntervalSize))
+        intervalEndPoints = np.array(np.where(np.diff(exceedingsCount) <= -minIntervalSize)[0])
         intervalBeginPoints = intervalEndPoints - exceedingsCount[intervalEndPoints] + 1
         if not m.boundary_extension:
             # manually adjust right border
             if exceedings[n - G_right - 1] & (not (n - G_right) in intervalEndPoints):  # check all this
                 lastBeginPoint = n - G_right - exceedingsCount[n - G_right] + 1
-                if not (exceedings[seq(lastBeginPoint, n - G_right)]): sys.exit(0)
+                if not (exceedings[lastBeginPoint: n - G_right+1]).all(): sys.exit(0)
                 if (lastBeginPoint in intervalBeginPoints): sys.exit(0)
-                highestStatPoint = np.argmax(m.stat[lastBeginPoint:n - G_right]) + lastBeginPoint - 1
+                highestStatPoint = np.argmax(np.append(m.stat[lastBeginPoint:n - G_right+1],0)) + lastBeginPoint - 1
                 if (highestStatPoint - lastBeginPoint >= minIntervalSize / 2):
                     intervalEndPoints = np.append(intervalEndPoints, n - G_right)
                     intervalBeginPoints = np.append(intervalBeginPoints, lastBeginPoint)
             # manually adjust left border
             if (exceedings[G_left] & (not G_left in intervalBeginPoints)):
-                firstEndPoint = np.where(diff(exceedingsCount) < 0)[0]
-                if not (exceedings[G_left:firstEndPoint]): sys.exit(0)
-                if firstEndPoint in intervalEndPoints:
-                    highestStatPoint = np.argmax(m.stat[G_left:firstEndPoint]) + G_left - 1
+                firstEndPoint = np.where(np.diff(exceedingsCount) < 0)[0][0]
+                if not (exceedings[G_left:firstEndPoint]).all(): sys.exit(0)
+                #if firstEndPoint in intervalEndPoints: sys.exit(0)
+                highestStatPoint = np.argmax(np.append(m.stat[G_left:firstEndPoint],0)) + G_left - 1
                 if (firstEndPoint - highestStatPoint >= minIntervalSize / 2):
                     intervalEndPoints = np.insert(intervalEndPoints, 0, firstEndPoint)
                     intervalBeginPoints = np.insert(intervalBeginPoints, 0, G_left)
@@ -261,18 +256,18 @@ def mosum(x, G, G_right=float("nan"), var_est_method=['mosum', 'mosum_min', 'mos
         # adjust, in case of no boundary CUSUM extension
         if not m.boundary_extension:
             localMaxima[n-G_right-1] = True
-        p_candidates = np.where(exceedings & localMaxima)
-        changePoints = m_s.eta_criterion_help(p_candidates, m.stat, eta, G_left, G_right)
+        p_candidates = np.where(exceedings & localMaxima) #np.asarray(exceedings & localMaxima).nonzero() #
+        changePoints = eta_criterion_help(p_candidates[0], m.stat, eta, G_left, G_right)
 
     n_cps = len(changePoints)
     if n_cps == 0:
         cpts_info = None
     else:
-        outcps = int(changePoints)
+        outcps = changePoints.astype(int)
         cpts_info = pd.DataFrame({"cpts": outcps,
                                   "G_left": np.full(n_cps, G_left),
                                   "G_right": np.full(n_cps, G_right),
-                                  "p_value": mosum_test.pValue(m.stat[outcps], n, G_left, G_right),
+                                  "p_value": pValue(m.stat[outcps], n, G_left, G_right),
                                   "jump": np.sqrt((G_left + G_right) / G_left / G_right) * m.stat[outcps]})
     # if do_confint:
     #    ret$ci < - confint.mosum.cpts(ret, level=level, N_reps=N_reps)
