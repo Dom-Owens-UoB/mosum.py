@@ -1,0 +1,59 @@
+:py:mod:`mosum.test_data`
+=========================
+
+.. py:module:: mosum.test_data
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   mosum.test_data.testData
+   mosum.test_data.testSignal
+
+
+
+.. py:function:: testData(model=['custom', 'blocks', 'fms', 'mix', 'stairs10', 'teeth10'][1], lengths=None, means=None, sds=None, rand_gen=np.random.normal, seed=None, rand_gen_args=[0, 1])
+
+   Test data with piecewise constant mean
+
+   Generate piecewise stationary time series with independent innovations and change points in the mean.
+
+   :param model: custom or pre-defined signal
+   :type model: str
+   :param lengths: vector of segment lengths (`custom` only)
+   :type lengths: int
+   :param means: vector of segment means (`custom` only)
+   :type means: int
+   :param sds: vector of segment standard deviations (`custom` only)
+   :type sds: int
+   :param rand_gen: innovation function
+   :type rand_gen: function
+   :param seed: random seed
+   :type seed: int
+   :param rand_gen_args: arguments for `rand_gen`
+   :type rand_gen_args: ndarray
+
+   :returns: * **x** (*ndarray*) -- simulated data series
+             * **mu** (*ndarray*) -- signal
+             * **sigma** (*float*) -- standard deviation
+             * **cpts** (*ndarray*) -- true change points
+
+   .. rubric:: Examples
+
+   >>> mosum.testData()
+   >>> mosum.testData("custom", lengths = [100,100], means=[0,1], sds= [1,1])
+
+
+.. py:function:: testSignal(model=['custom', 'blocks', 'fms', 'mix', 'stairs10', 'teeth10'][1], lengths=None, means=None, sds=None)
+
+   Piecewise constant test signal
+
+   Produce vectors of mean and dispersion values for generating piecewise stationary time series.
+
+

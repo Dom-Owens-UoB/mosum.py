@@ -1,0 +1,6 @@
+:py:mod:`mosum.bootstrap`
+=========================
+
+.. py:module:: mosum.bootstrap
+
+

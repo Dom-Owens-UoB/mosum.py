@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>mosum.persp3D &#8212; mosum 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-mosum.persp3D">
+<span id="mosum-persp3d"></span><h1><a class="reference internal" href="#module-mosum.persp3D" title="mosum.persp3D"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mosum.persp3D</span></code></a><a class="headerlink" href="#module-mosum.persp3D" title="Permalink to this heading">¶</a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mosum.persp3D.persp3D_multiscaleMosum" title="mosum.persp3D.persp3D_multiscaleMosum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">persp3D_multiscaleMosum</span></code></a>(x[, mosum_args, threshold, ...])</p></td>
+<td><p>3D Visualisation of multiscale MOSUM statistics</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.persp3D.persp3D_multiscaleMosum">
+<span class="sig-prename descclassname"><span class="pre">mosum.persp3D.</span></span><span class="sig-name descname"><span class="pre">persp3D_multiscaleMosum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mosum_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">dict()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['critical_value',</span> <span class="pre">'custom'][0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">cm.coolwarm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'G'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zlab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MOSUM'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.persp3D.persp3D_multiscaleMosum" title="Permalink to this definition">¶</a></dt>
+<dd><p>3D Visualisation of multiscale MOSUM statistics</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>list</em>) – input data</p></li>
+<li><p><strong>mosum_args</strong> (<em>dict</em>) – dictionary of keyword arguments to <cite>mosum</cite></p></li>
+<li><p><strong>threshold</strong> (<em>Str</em>) – indicates which threshold should be used to determine significance.
+By default, it is chosen from the asymptotic distribution at the given significance level ‘alpha`.
+Alternatively it is possible to parse a user-defined function with ‘threshold_function’.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – numeric value for the significance level with ‘0 &lt;= alpha &lt;= 1’;
+use iff ‘threshold = “critical_value”’</p></li>
+<li><p><strong>threshold_function</strong> (<em>function</em>) – </p></li>
+<li><p><strong>palette</strong> (<em>matplotlib.colors.LinearSegmentedColormap</em>) – colour palette for plotting, accessible from <cite>matplotlib.cm</cite></p></li>
+<li><p><strong>xlab</strong> (<em>Str</em>) – axis labels for plot</p></li>
+<li><p><strong>ylab</strong> (<em>Str</em>) – axis labels for plot</p></li>
+<li><p><strong>zlab</strong> (<em>Str</em>) – axis labels for plot</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mosum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xx</span> <span class="o">=</span> <span class="n">mosum</span><span class="o">.</span><span class="n">testData</span><span class="p">(</span><span class="s2">&quot;blocks&quot;</span><span class="p">)[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mosum</span><span class="o">.</span><span class="n">persp3D_multiscaleMosum</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Dom Owens.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="../../../_sources/autoapi/mosum/persp3D/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

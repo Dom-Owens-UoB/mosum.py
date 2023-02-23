@@ -1,0 +1,43 @@
+:py:mod:`mosum.bandwidth`
+=========================
+
+.. py:module:: mosum.bandwidth
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   mosum.bandwidth.multiscale_grid_obj
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   mosum.bandwidth.bandwidths_default
+   mosum.bandwidth.multiscale_grid
+
+
+
+.. py:function:: bandwidths_default(n, d_min=10, G_min=10, G_max=None) -> int
+
+   Default choice for the set of multiple bandwidths
+
+
+.. py:class:: multiscale_grid_obj(grid, max_imbalance)
+
+   multiscale_grid object
+
+
+.. py:function:: multiscale_grid(bandwidths_left, bandwidths_right=None, method='cartesian', max_unbalance=4)
+
+   Multiscale bandwidth grids
+
+
