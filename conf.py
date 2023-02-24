@@ -41,7 +41,7 @@ extensions = [
     "nbsphinx"
 ]
 autoapi_dirs = ["mosum"]
-html_theme = "furo"
+#html_theme = "furo"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
