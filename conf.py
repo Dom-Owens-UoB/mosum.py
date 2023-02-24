@@ -33,15 +33,14 @@
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
-    "autoapi.extension",
+    #"autoapi.extension",
     "sphinx.ext.napoleon",
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
     "nbsphinx"
 ]
-autoapi_dirs = ["mosum"]
-#html_theme = "furo"
+#autoapi_dirs = ["mosum"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
