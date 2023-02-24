@@ -11,6 +11,7 @@ jobs:
           pip install sphinx sphinx_rtd_theme
           pip install sphinx-autoapi
           pip install sphinx nbsphinx
+          pip install pandoc
       - name: Sphinx build
         run: |
           sphinx-build . _build
