@@ -1,0 +1,42 @@
+:py:mod:`mosum.mosum_test`
+==========================
+
+.. py:module:: mosum.mosum_test
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   mosum.mosum_test.asymptoticA
+   mosum.mosum_test.asymptoticB
+   mosum.mosum_test.criticalValue
+   mosum.mosum_test.pValue
+
+
+
+.. py:function:: asymptoticA(x: float)
+
+   Help function: asymptotic scaling.
+
+
+.. py:function:: asymptoticB(x: float, K: int)
+
+   Help function: asymptotic shift
+
+
+.. py:function:: criticalValue(n, G_left, G_right, alpha)
+
+   Computes the asymptotic critical value for the MOSUM test
+
+
+.. py:function:: pValue(z, n, G_left, G_right=None)
+
+   Computes the asymptotic p-value for the MOSUM test
+
+

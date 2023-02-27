@@ -1,0 +1,9 @@
+API
+===
+.. autosummary::
+    mosum.mosum
+    mosum.mosum_obj
+    bottom_up.multiscale_bottomUp
+    bottom_up.multiscale_cpts
+    persp3D.persp3D_multiscaleMosum
+    test_data.testData

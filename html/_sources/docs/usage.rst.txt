@@ -1,0 +1,13 @@
+Usage
+=====
+
+Installation
+------------
+
+.. code-block:: console
+
+   (.venv) $ pip install mosum
+
+
+
+

@@ -1,0 +1,6 @@
+:py:mod:`mosum.local_prune`
+===========================
+
+.. py:module:: mosum.local_prune
+
+

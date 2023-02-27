@@ -1,0 +1,104 @@
+:py:mod:`mosum.bottom_up`
+=========================
+
+.. py:module:: mosum.bottom_up
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   mosum.bottom_up.multiscale_cpts
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   mosum.bottom_up.multiscale_bottomUp
+
+
+
+.. py:class:: multiscale_cpts(x, cpts, cpts_info, pooled_cpts, G, alpha, threshold, threshold_function, criterion, eta, do_confint, ci)
+
+   multiscale_cpts object
+
+   .. py:method:: plot(display=['data', 'mosum'][0], cpts_col='red', critical_value_col='blue', xlab='Time')
+
+      plot method - plots data or detector
+
+
+   .. py:method:: summary()
+
+      summary method
+
+
+   .. py:method:: print()
+
+      print method
+
+
+
+.. py:function:: multiscale_bottomUp(x, G=None, threshold=['critical_value', 'custom'][0], alpha=0.1, threshold_function=None, eta=0.4, do_confint=False, level=0.05, N_reps=1000)
+
+   Multiscale MOSUM algorithm with bottom-up merging
+
+   :param x: input data
+   :type x: list
+   :param G:
+             vector of bandwidths; given as either integers less than `len(x)/2`,
+              or numbers between `0` and `0.5` describing the moving sum bandwidths relative to `len(x)`
+   :type G: int
+   :param threshold: indicates which threshold should be used to determine significance.
+                     By default, it is chosen from the asymptotic distribution at the given significance level 'alpha`.
+                     Alternatively it is possible to parse a user-defined function with 'threshold_function'.
+   :type threshold: Str
+   :param alpha: numeric value for the significance level with '0 <= alpha <= 1';
+                 use iff 'threshold = "critical_value"'
+   :type alpha: float
+   :param threshold_function:
+   :type threshold_function: function
+   :param eta: a positive numeric value for the minimal mutual distance of changes,
+               relative to moving sum bandwidth (iff 'criterion = "eta"')
+   :type eta: float
+   :param cpts: estimated change points
+   :type cpts: int
+   :param cpts_info: information on change points
+                     self.pooled_cpts = pooled_cpts
+                     self.do_confint = do_confint
+                     self.ci = ci  # note
+                     self.var_est_method = "mosum"
+   :type cpts_info: DataFrame
+   :param do_confint: flag indicating whether to compute the confidence intervals for change points
+   :type do_confint: bool
+   :param level: use iff 'do_confint = True'; a numeric value ('0 <= level <= 1') with which '100(1-level)%'
+                 confidence interval is generated
+   :type level: float
+   :param N_reps: use iff 'do.confint = True'; number of bootstrap replicates to be generated
+   :type N_reps: int
+
+   :returns: * *multiscale_cpts object containing*
+             * **x** (*list*) -- input data
+             * **G** (*int*) -- bandwidth vector
+             * *threshold, alpha, threshold_function, eta* -- input
+             * **cpts** (*ndarray*) -- estimated change point
+             * **cpts_info** (*DataFrame*) -- information on change points, including detection bandwidths, asymptotic p-values, scaled jump sizes
+             * **pooled_cpts** (*ndarray*) -- change point candidates
+             * **do_confint** (*bool*) -- input
+             * *ci* -- confidence intervals
+
+   .. rubric:: Examples
+
+   >>> import mosum
+   >>> xx = mosum.testData("blocks")["x"]
+   >>> xx_m  = mosum.multiscale_bottomUp(xx, G = [50,100])
+   >>> xx_m.summary()
+   >>> xx_m.print()
+
+

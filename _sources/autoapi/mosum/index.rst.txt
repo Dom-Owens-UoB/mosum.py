@@ -1,0 +1,254 @@
+:py:mod:`mosum`
+===============
+
+.. py:module:: mosum
+
+.. autoapi-nested-parse::
+
+   Moving Sum Based Procedures for Changes in the Mean
+
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   bandwidth/index.rst
+   bootstrap/index.rst
+   bottom_up/index.rst
+   local_prune/index.rst
+   mosum/index.rst
+   mosum_stat/index.rst
+   mosum_test/index.rst
+   persp3D/index.rst
+   test_data/index.rst
+   test_models/index.rst
+
+
+Package Contents
+----------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   mosum.mosum
+   mosum.criticalValue
+   mosum.multiscale_bottomUp
+   mosum.bandwidths_default
+   mosum.testData
+   mosum.persp3D_multiscaleMosum
+
+
+
+.. py:function:: mosum(x, G, G_right=float('nan'), var_est_method=['mosum', 'mosum_min', 'mosum_max', 'custom'][0], var_custom=None, boundary_extension=True, threshold=['critical_value', 'custom'][0], alpha=0.1, threshold_custom=float('nan'), criterion=['eta', 'epsilon'][0], eta=0.4, epsilon=0.2, do_confint=False, level=0.05, N_reps=1000)
+
+   MOSUM procedure for multiple change point estimation
+
+   Computes the MOSUM detector, detects (multiple) change points and estimates their locations.
+
+   :param x: input data
+   :type x: list
+   :param G: bandwidth; should be less than 'len(x)/2'
+   :type G: int
+   :param G_right: if 'G.right != G}, the asymmetric bandwidth '(G, G.right)' will be used;
+                   if 'max(G, G.right)/min(G, G.right) > 4', a warning message is generated
+   :type G_right: int
+   :param var_est_method: 'mosum' : both-sided MOSUM variance estimator
+                          'mosum_min' : minimum of the sample variance estimates from the left and right summation windows
+                          'mosum_max' : maximum of the sample variance estimates from the left and right summation windows
+                          'custom' : a vector of 'len(x)' is to be parsed by the user; use 'var.custom' in this case to do so
+   :type var_est_method: how the variance is estimated; possible values are
+   :param var_custom: vector (of the same length as 'x}) containing local estimates of the variance or long run variance;
+                      use iff 'var.est.method = "custom"'
+   :type var_custom: float
+   :param boundary_extension: a logical value indicating whether the boundary values should be filled in with CUSUM values
+   :type boundary_extension: bool
+   :param threshold: indicates which threshold should be used to determine significance.
+                     By default, it is chosen from the asymptotic distribution at the given significance level 'alpha`.
+                     Alternatively it is possible to parse a user-defined numerical value with 'threshold.custom'.
+   :type threshold: Str
+   :param alpha: numeric value for the significance level with '0 <= alpha <= 1';
+                 use iff 'threshold = "critical_value"'
+   :type alpha: float
+   :param threshold_custom: value greater than 0 for the threshold of significance; use iff 'threshold = "custom"'
+   :type threshold_custom: float
+   :param criterion: indicates how to determine whether each point 'k' at which MOSUM statistic
+                     exceeds the threshold is a change point; possible values are
+                     'eta' : there is no larger exceeding in an 'eta*G' environment of 'k'
+                     'epsilon' : 'k' is the maximum of its local exceeding environment, which has at least size 'epsilon*G'
+   :type criterion: Str
+   :param eta: a positive numeric value for the minimal mutual distance of changes,
+               relative to moving sum bandwidth (iff 'criterion = "eta"')
+   :type eta: float
+   :param epsilon: a numeric value in (0,1] for the minimal size of exceeding environments,
+                   relative to moving sum bandwidth (iff 'criterion = "epsilon"')
+   :type epsilon: float
+   :param do_confint: flag indicating whether to compute the confidence intervals for change points
+   :type do_confint: bool
+   :param level: use iff 'do_confint = True'; a numeric value ('0 <= level <= 1') with which '100(1-level)%'
+                 confidence interval is generated
+   :type level: float
+   :param N_reps: use iff 'do.confint = True'; number of bootstrap replicates to be generated
+   :type N_reps: int
+
+   :returns: * *mosum_obj object containing*
+             * **x** (*list*) -- input data
+             * **G_left, G_right** (*int*) -- bandwidths
+             * **var_est_method, var_custom, boundary_extension** (*Str*) -- input
+             * **stat** (*list*) -- MOSUM statistics
+             * **rollsums** (*list*) -- MOSUM detector
+             * **var_estimation** (*list*) -- local variance estimates
+             * *threshold, alpha, threshold_custom* -- input
+             * **threshold_value** (*float*) -- threshold of MOSUM test
+             * *criterion, eta, epsilon* -- input
+             * **cpts** (*ndarray*) -- estimated change point
+             * **cpts_info** (*DataFrame*) -- information on change points, including detection bandwidths, asymptotic p-values, scaled jump sizes
+             * **do_confint** (*bool*) -- input
+             * *ci* -- confidence intervals
+
+   .. rubric:: Examples
+
+   >>> import mosum
+   >>> xx = mosum.testData("blocks")["x"]
+   >>> xx_m  = mosum.mosum(xx, G = 50, criterion = "eta", boundary_extension = True)
+   >>> xx_m.summary()
+   >>> xx_m.print()
+
+
+.. py:function:: criticalValue(n, G_left, G_right, alpha)
+
+   Computes the asymptotic critical value for the MOSUM test
+
+
+.. py:function:: multiscale_bottomUp(x, G=None, threshold=['critical_value', 'custom'][0], alpha=0.1, threshold_function=None, eta=0.4, do_confint=False, level=0.05, N_reps=1000)
+
+   Multiscale MOSUM algorithm with bottom-up merging
+
+   :param x: input data
+   :type x: list
+   :param G:
+             vector of bandwidths; given as either integers less than `len(x)/2`,
+              or numbers between `0` and `0.5` describing the moving sum bandwidths relative to `len(x)`
+   :type G: int
+   :param threshold: indicates which threshold should be used to determine significance.
+                     By default, it is chosen from the asymptotic distribution at the given significance level 'alpha`.
+                     Alternatively it is possible to parse a user-defined function with 'threshold_function'.
+   :type threshold: Str
+   :param alpha: numeric value for the significance level with '0 <= alpha <= 1';
+                 use iff 'threshold = "critical_value"'
+   :type alpha: float
+   :param threshold_function:
+   :type threshold_function: function
+   :param eta: a positive numeric value for the minimal mutual distance of changes,
+               relative to moving sum bandwidth (iff 'criterion = "eta"')
+   :type eta: float
+   :param cpts: estimated change points
+   :type cpts: int
+   :param cpts_info: information on change points
+                     self.pooled_cpts = pooled_cpts
+                     self.do_confint = do_confint
+                     self.ci = ci  # note
+                     self.var_est_method = "mosum"
+   :type cpts_info: DataFrame
+   :param do_confint: flag indicating whether to compute the confidence intervals for change points
+   :type do_confint: bool
+   :param level: use iff 'do_confint = True'; a numeric value ('0 <= level <= 1') with which '100(1-level)%'
+                 confidence interval is generated
+   :type level: float
+   :param N_reps: use iff 'do.confint = True'; number of bootstrap replicates to be generated
+   :type N_reps: int
+
+   :returns: * *multiscale_cpts object containing*
+             * **x** (*list*) -- input data
+             * **G** (*int*) -- bandwidth vector
+             * *threshold, alpha, threshold_function, eta* -- input
+             * **cpts** (*ndarray*) -- estimated change point
+             * **cpts_info** (*DataFrame*) -- information on change points, including detection bandwidths, asymptotic p-values, scaled jump sizes
+             * **pooled_cpts** (*ndarray*) -- change point candidates
+             * **do_confint** (*bool*) -- input
+             * *ci* -- confidence intervals
+
+   .. rubric:: Examples
+
+   >>> import mosum
+   >>> xx = mosum.testData("blocks")["x"]
+   >>> xx_m  = mosum.multiscale_bottomUp(xx, G = [50,100])
+   >>> xx_m.summary()
+   >>> xx_m.print()
+
+
+.. py:function:: bandwidths_default(n, d_min=10, G_min=10, G_max=None) -> int
+
+   Default choice for the set of multiple bandwidths
+
+
+.. py:function:: testData(model=['custom', 'blocks', 'fms', 'mix', 'stairs10', 'teeth10'][1], lengths=None, means=None, sds=None, rand_gen=np.random.normal, seed=None, rand_gen_args=[0, 1])
+
+   Test data with piecewise constant mean
+
+   Generate piecewise stationary time series with independent innovations and change points in the mean.
+
+   :param model: custom or pre-defined signal
+   :type model: str
+   :param lengths: vector of segment lengths (`custom` only)
+   :type lengths: int
+   :param means: vector of segment means (`custom` only)
+   :type means: int
+   :param sds: vector of segment standard deviations (`custom` only)
+   :type sds: int
+   :param rand_gen: innovation function
+   :type rand_gen: function
+   :param seed: random seed
+   :type seed: int
+   :param rand_gen_args: arguments for `rand_gen`
+   :type rand_gen_args: ndarray
+
+   :returns: * **x** (*ndarray*) -- simulated data series
+             * **mu** (*ndarray*) -- signal
+             * **sigma** (*float*) -- standard deviation
+             * **cpts** (*ndarray*) -- true change points
+
+   .. rubric:: Examples
+
+   >>> mosum.testData()
+   >>> mosum.testData("custom", lengths = [100,100], means=[0,1], sds= [1,1])
+
+
+.. py:function:: persp3D_multiscaleMosum(x, mosum_args=dict(), threshold=['critical_value', 'custom'][0], alpha=0.1, threshold_function=None, palette=cm.coolwarm, xlab='G', ylab='time', zlab='MOSUM')
+
+   3D Visualisation of multiscale MOSUM statistics
+
+   :param x: input data
+   :type x: list
+   :param mosum_args: dictionary of keyword arguments to `mosum`
+   :type mosum_args: dict
+   :param threshold: indicates which threshold should be used to determine significance.
+                     By default, it is chosen from the asymptotic distribution at the given significance level 'alpha`.
+                     Alternatively it is possible to parse a user-defined function with 'threshold_function'.
+   :type threshold: Str
+   :param alpha: numeric value for the significance level with '0 <= alpha <= 1';
+                 use iff 'threshold = "critical_value"'
+   :type alpha: float
+   :param threshold_function:
+   :type threshold_function: function
+   :param palette: colour palette for plotting, accessible from `matplotlib.cm`
+   :type palette: matplotlib.colors.LinearSegmentedColormap
+   :param xlab: axis labels for plot
+   :type xlab: Str
+   :param ylab: axis labels for plot
+   :type ylab: Str
+   :param zlab: axis labels for plot
+   :type zlab: Str
+
+   .. rubric:: Examples
+
+   >>> import mosum
+   >>> xx = mosum.testData("blocks")["x"]
+   >>> mosum.persp3D_multiscaleMosum(xx)
+
+

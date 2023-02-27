@@ -1,0 +1,24 @@
+:py:mod:`mosum.test_models`
+===========================
+
+.. py:module:: mosum.test_models
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   mosum.test_models.modelSignal
+
+
+
+.. py:function:: modelSignal(model=['custom', 'blocks', 'fms', 'mix', 'stairs10', 'teeth10'][1])
+
+   predefined models
+
+
