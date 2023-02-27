@@ -41,6 +41,7 @@ class multiscale_cpts:
                 brks = np.concatenate((0, self.cpts, len(self.x)), axis=None)
             else:
                 brks = np.array([0, len(self.x)])
+            brks.sort()
             fhat = self.x * 0
             for kk in np.arange(0,(len(brks) - 1)):
                 int = np.arange(brks[kk],brks[kk + 1])
