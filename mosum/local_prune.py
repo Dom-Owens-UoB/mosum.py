@@ -97,7 +97,7 @@ def multiscale_localPrune(x, G=None, max_unbalance=4,
      >>> xx_m  = mosum.multiscale_localPrune(xx, G = [8,15,30,70])
      >>> xx_m.summary()
      >>> xx_m.print()
-     """
+    """
     n = len(x)
 
     if G is None:

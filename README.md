@@ -13,9 +13,9 @@ See also Meier, Kirch and Cho (2021) <doi:10.18637/jss.v097.i08> which accompani
 $ pip install mosum
 ```
 
-## Usage
+## Quick start
 
-mosum.py can be used as follows to detect changes in the mean of a time series
+`mosum.py` can be used as follows to detect changes in the mean of a time series
 
 ```python
 import mosum
@@ -32,6 +32,10 @@ from matplotlib import pyplot as plt
 plt.show()
 ```
 
+## Usage 
+
+See [usage](https://dom-owens-uob.github.io/mosum.py/docs/usage.html)
+for a detailed description of how to use the package.
 ## License
 
 mosum.py was created by Dom Owens, based on the R package "mosum", originally by Alexander Meier, Haeran Cho, and Claudia Kirch.
