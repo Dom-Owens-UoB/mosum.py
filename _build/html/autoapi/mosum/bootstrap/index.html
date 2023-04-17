@@ -34,6 +34,76 @@
             
   <section id="module-mosum.bootstrap">
 <span id="mosum-bootstrap"></span><h1><a class="reference internal" href="#module-mosum.bootstrap" title="mosum.bootstrap"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mosum.bootstrap</span></code></a><a class="headerlink" href="#module-mosum.bootstrap" title="Permalink to this heading">¶</a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mosum.bootstrap.confint_mosum_cpts" title="mosum.bootstrap.confint_mosum_cpts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">confint_mosum_cpts</span></code></a>(object[, parm, level, N_reps])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mosum.bootstrap.confint_multiscale_cpts" title="mosum.bootstrap.confint_multiscale_cpts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">confint_multiscale_cpts</span></code></a>(object[, parm, level, N_reps])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mosum.bootstrap.cpts_bootstrap" title="mosum.bootstrap.cpts_bootstrap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpts_bootstrap</span></code></a>(mcpts, N_reps, level)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mosum.bootstrap.mean_help" title="mosum.bootstrap.mean_help"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean_help</span></code></a>(x, l, r)</p></td>
+<td><p>helping function for bootstrap (compute local means)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mosum.bootstrap.get_k_star" title="mosum.bootstrap.get_k_star"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_k_star</span></code></a>(x_star, k_hat, G_l, G_r, G_ll, G_rr)</p></td>
+<td><p>Compute bootstrapped mosum statistic and return maximum position thereof</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mosum.bootstrap.bootstrapped_timeSeries" title="mosum.bootstrap.bootstrapped_timeSeries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bootstrapped_timeSeries</span></code></a>(cpts, x)</p></td>
+<td><p>Obtain bootstrap replicate of time series</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mosum.bootstrap.cpts_bootstrap_help" title="mosum.bootstrap.cpts_bootstrap_help"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpts_bootstrap_help</span></code></a>(cpts_info, x, N_reps)</p></td>
+<td><p>Helping function to get bootstrap replicates of change point estimates</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.bootstrap.confint_mosum_cpts">
+<span class="sig-prename descclassname"><span class="pre">mosum.bootstrap.</span></span><span class="sig-name descname"><span class="pre">confint_mosum_cpts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cpts'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_reps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.bootstrap.confint_mosum_cpts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.bootstrap.confint_multiscale_cpts">
+<span class="sig-prename descclassname"><span class="pre">mosum.bootstrap.</span></span><span class="sig-name descname"><span class="pre">confint_multiscale_cpts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cpts'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_reps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.bootstrap.confint_multiscale_cpts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.bootstrap.cpts_bootstrap">
+<span class="sig-prename descclassname"><span class="pre">mosum.bootstrap.</span></span><span class="sig-name descname"><span class="pre">cpts_bootstrap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mcpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_reps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.bootstrap.cpts_bootstrap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.bootstrap.mean_help">
+<span class="sig-prename descclassname"><span class="pre">mosum.bootstrap.</span></span><span class="sig-name descname"><span class="pre">mean_help</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.bootstrap.mean_help" title="Permalink to this definition">¶</a></dt>
+<dd><p>helping function for bootstrap (compute local means)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.bootstrap.get_k_star">
+<span class="sig-prename descclassname"><span class="pre">mosum.bootstrap.</span></span><span class="sig-name descname"><span class="pre">get_k_star</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_hat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_ll</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_rr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.bootstrap.get_k_star" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute bootstrapped mosum statistic and return maximum position thereof</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.bootstrap.bootstrapped_timeSeries">
+<span class="sig-prename descclassname"><span class="pre">mosum.bootstrap.</span></span><span class="sig-name descname"><span class="pre">bootstrapped_timeSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.bootstrap.bootstrapped_timeSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain bootstrap replicate of time series</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.bootstrap.cpts_bootstrap_help">
+<span class="sig-prename descclassname"><span class="pre">mosum.bootstrap.</span></span><span class="sig-name descname"><span class="pre">cpts_bootstrap_help</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cpts_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_reps</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.bootstrap.cpts_bootstrap_help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helping function to get bootstrap replicates of change point estimates</p>
+</dd></dl>
+
+</section>
+</section>
 </section>
 
 

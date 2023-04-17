@@ -302,7 +302,7 @@ div.rendered_html tbody tr:hover {
 <h2>Generating data<a class="headerlink" href="#Generating-data" title="Permalink to this heading">¶</a></h2>
 <p>We can simulate data from a mean-change model with <code class="docutils literal notranslate"><span class="pre">testdata</span></code>. The simulated data is stored in <code class="docutils literal notranslate"><span class="pre">x</span></code>, and the signal in <code class="docutils literal notranslate"><span class="pre">mu</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mosum</span>
@@ -328,7 +328,7 @@ div.rendered_html tbody tr:hover {
 <h2>MOSUM procedure<a class="headerlink" href="#MOSUM-procedure" title="Permalink to this heading">¶</a></h2>
 <p>The function <code class="docutils literal notranslate"><span class="pre">mosum</span></code> uses a single bandwidth to detect changes. This returns an object with <code class="docutils literal notranslate"><span class="pre">plot</span></code>, <code class="docutils literal notranslate"><span class="pre">print</span></code>, and <code class="docutils literal notranslate"><span class="pre">summary</span></code> methods.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">ms</span> <span class="o">=</span> <span class="n">mosum</span><span class="o">.</span><span class="n">mosum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
@@ -345,7 +345,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">ms</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="s2">&quot;mosum&quot;</span><span class="p">)</span>
@@ -361,7 +361,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">ms</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
@@ -375,16 +375,18 @@ div.rendered_html tbody tr:hover {
 <div class="highlight"><pre>
 change points detected with bandwidths (20,20) at alpha = 0.1 according to eta-criterion with eta = 0.4 and mosum variance estimate:
    cpts  G_left  G_right  p_value   jump
-0   203      20       20    0.017  1.517
-1   265      20       20    0.000  1.979
-2   825      20       20    0.002  1.749
-3  1337      20       20    0.000  1.911
-4  1555      20       20    0.001  1.807
-5  1658      20       20    0.001  1.882
+0   203      20       20    0.013  1.547
+1   268      20       20    0.000  2.243
+2   305      20       20    0.001  1.853
+3   466      20       20    0.008  1.597
+4   510      20       20    0.000  2.033
+5   818      20       20    0.014  1.542
+6  1330      20       20    0.000  2.140
+7  1660      20       20    0.011  1.562
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">ms</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
@@ -398,12 +400,14 @@ change points detected with bandwidths (20,20) at alpha = 0.1 according to eta-c
 <div class="highlight"><pre>
 change points detected at alpha = 0.1 according to eta-criterion with eta = 0.4 and mosum variance estimate:
    cpts  G_left  G_right  p_value   jump
-0   203      20       20    0.017  1.517
-1   265      20       20    0.000  1.979
-2   825      20       20    0.002  1.749
-3  1337      20       20    0.000  1.911
-4  1555      20       20    0.001  1.807
-5  1658      20       20    0.001  1.882
+0   203      20       20    0.013  1.547
+1   268      20       20    0.000  2.243
+2   305      20       20    0.001  1.853
+3   466      20       20    0.008  1.597
+4   510      20       20    0.000  2.033
+5   818      20       20    0.014  1.542
+6  1330      20       20    0.000  2.140
+7  1660      20       20    0.011  1.562
 </pre></div></div>
 </div>
 </section>
@@ -411,7 +415,7 @@ change points detected at alpha = 0.1 according to eta-criterion with eta = 0.4 
 <h2>Multiscale MOSUM procedure with bottom-up merging<a class="headerlink" href="#Multiscale-MOSUM-procedure-with-bottom-up-merging" title="Permalink to this heading">¶</a></h2>
 <p>The function <code class="docutils literal notranslate"><span class="pre">multiscale_bottomUp</span></code> runs the MOSUM procedure with multiple bandwidths, merging these from smallest to largest. Again, this returns an object with <code class="docutils literal notranslate"><span class="pre">plot</span></code>, <code class="docutils literal notranslate"><span class="pre">print</span></code>, and <code class="docutils literal notranslate"><span class="pre">summary</span></code> methods.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span> --no-display
@@ -429,7 +433,7 @@ change points detected at alpha = 0.1 according to eta-criterion with eta = 0.4 
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">ms_multi</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
@@ -442,22 +446,21 @@ change points detected at alpha = 0.1 according to eta-criterion with eta = 0.4 
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 change points detected with bandwidths ([10, 20, 40],[10, 20, 40]) at alpha = 0.1 according to eta-criterion with eta = 0.4 and mosum variance estimate:
-      cpts  G_left  G_right  p_value   jump
-0    203.0    10.0     10.0    0.065  2.017
-1    264.0    10.0     10.0    0.082  1.983
-2    509.0    10.0     10.0    0.068  2.009
-3   1330.0    10.0     10.0    0.016  2.215
-4   1555.0    10.0     10.0    0.057  2.035
-5   1657.0    10.0     10.0    0.000  2.693
-6    825.0    20.0     20.0    0.002  1.749
-7    304.0    40.0     40.0    0.010  1.091
-8    453.0    40.0     40.0    0.001  1.296
-9    901.0    40.0     40.0    0.064  0.941
-10  1782.0    40.0     40.0    0.072  0.931
+     cpts  G_left  G_right  p_value   jump
+0   268.0    10.0     10.0    0.005  2.365
+1   306.0    10.0     10.0    0.039  2.087
+2   466.0    10.0     10.0    0.007  2.331
+3   818.0    10.0     10.0    0.051  2.051
+4  1330.0    10.0     10.0    0.001  2.551
+5   203.0    20.0     20.0    0.013  1.547
+6   510.0    20.0     20.0    0.000  2.033
+7  1660.0    20.0     20.0    0.011  1.562
+8   903.0    40.0     40.0    0.015  1.059
+9  1543.0    40.0     40.0    0.006  1.130
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">ms_multi</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
@@ -470,21 +473,137 @@ change points detected with bandwidths ([10, 20, 40],[10, 20, 40]) at alpha = 0.
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 change points detected at alpha = 0.1 according to eta-criterion with eta = 0.4 and mosum variance estimate:
-      cpts  G_left  G_right  p_value   jump
-0    203.0    10.0     10.0    0.065  2.017
-1    264.0    10.0     10.0    0.082  1.983
-2    509.0    10.0     10.0    0.068  2.009
-3   1330.0    10.0     10.0    0.016  2.215
-4   1555.0    10.0     10.0    0.057  2.035
-5   1657.0    10.0     10.0    0.000  2.693
-6    825.0    20.0     20.0    0.002  1.749
-7    304.0    40.0     40.0    0.010  1.091
-8    453.0    40.0     40.0    0.001  1.296
-9    901.0    40.0     40.0    0.064  0.941
-10  1782.0    40.0     40.0    0.072  0.931
+     cpts  G_left  G_right  p_value   jump
+0   268.0    10.0     10.0    0.005  2.365
+1   306.0    10.0     10.0    0.039  2.087
+2   466.0    10.0     10.0    0.007  2.331
+3   818.0    10.0     10.0    0.051  2.051
+4  1330.0    10.0     10.0    0.001  2.551
+5   203.0    20.0     20.0    0.013  1.547
+6   510.0    20.0     20.0    0.000  2.033
+7  1660.0    20.0     20.0    0.011  1.562
+8   903.0    40.0     40.0    0.015  1.059
+9  1543.0    40.0     40.0    0.006  1.130
 </pre></div></div>
 </div>
 </section>
+<section id="Multiscale-MOSUM-procedure-with-local-pruning">
+<h2>Multiscale MOSUM procedure with local pruning<a class="headerlink" href="#Multiscale-MOSUM-procedure-with-local-pruning" title="Permalink to this heading">¶</a></h2>
+<p>The function <code class="docutils literal notranslate"><span class="pre">multiscale_localPrune</span></code> runs the MOSUM procedure with local pruning, removing change point candidates locally to optimise an information criterion. Again, this returns an object with <code class="docutils literal notranslate"><span class="pre">plot</span></code>, <code class="docutils literal notranslate"><span class="pre">print</span></code>, and <code class="docutils literal notranslate"><span class="pre">summary</span></code> methods.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span> --no-display
+<span class="n">ms_multi_lp</span> <span class="o">=</span> <span class="n">mosum</span><span class="o">.</span><span class="n">multiscale_localPrune</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">40</span><span class="p">])</span>
+<span class="n">ms_multi_lp</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/docs_usage_12_0.png" src="../_images/docs_usage_12_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">ms_multi_lp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">display</span> <span class="o">=</span> <span class="s2">&quot;significance&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/docs_usage_13_0.png" src="../_images/docs_usage_13_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">ms_multi_lp</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+change points detected with bandwidths ([10, 20, 40],[10, 20, 40]) at alpha = 0.1 according to eta-criterion with eta = 0.4 and mosum variance estimate:
+   cpts  G_left  G_right  p_value   jump
+0   203      10       20    0.056  1.733
+1   268      10       10    0.005  2.365
+2   306      10       10    0.039  2.087
+3   466      10       10    0.007  2.331
+4   510      10       20    0.001  2.267
+5   818      10       10    0.051  2.051
+6   903      40       10    0.062  1.561
+7  1330      10       10    0.001  2.551
+8  1555      40       20    0.024  1.261
+9  1660      20       10    0.025  1.832
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">ms_multi_lp</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+change points detected at alpha = 0.1 according to eta-criterion with eta = 0.4 and mosum variance estimate:
+   cpts  G_left  G_right  p_value   jump
+0   203      10       20    0.056  1.733
+1   268      10       10    0.005  2.365
+2   306      10       10    0.039  2.087
+3   466      10       10    0.007  2.331
+4   510      10       20    0.001  2.267
+5   818      10       10    0.051  2.051
+6   903      40       10    0.062  1.561
+7  1330      10       10    0.001  2.551
+8  1555      40       20    0.024  1.261
+9  1660      20       10    0.025  1.832
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Confidence-intervals">
+<h1>Confidence intervals<a class="headerlink" href="#Confidence-intervals" title="Permalink to this heading">¶</a></h1>
+<p>To obtain confidence intervals, we can specify <code class="docutils literal notranslate"><span class="pre">do.confint</span> <span class="pre">=</span> <span class="pre">True</span></code> as an argument to the <code class="docutils literal notranslate"><span class="pre">mosum</span></code>, <code class="docutils literal notranslate"><span class="pre">multiscale_bottomUp</span></code> or <code class="docutils literal notranslate"><span class="pre">multiscale_localPrune</span></code> functions, or use the <code class="docutils literal notranslate"><span class="pre">confint</span></code> method for the resulting objects.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">b1</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">confint</span><span class="p">()</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">ms_multi</span><span class="o">.</span><span class="n">confint</span><span class="p">()</span>
+<span class="n">b3</span> <span class="o">=</span> <span class="n">ms_multi_lp</span><span class="o">.</span><span class="n">confint</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/do16317/.cache/pypoetry/virtualenvs/mosum-eruAWuM2-py3.9/lib/python3.9/site-packages/numpy/core/fromnumeric.py:3432: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/home/do16317/.cache/pypoetry/virtualenvs/mosum-eruAWuM2-py3.9/lib/python3.9/site-packages/numpy/core/_methods.py:190: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+</pre></div></div>
+</div>
 <section id="3D-visualisation">
 <h2>3D visualisation<a class="headerlink" href="#3D-visualisation" title="Permalink to this heading">¶</a></h2>
 <p>We can visualise in 3D the MOSUM detector at a range of scales, with the heights and colours of the detector corresponding to the size.</p>
@@ -500,7 +619,7 @@ change points detected at alpha = 0.1 according to eta-criterion with eta = 0.4 
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/docs_usage_12_0.png" src="../_images/docs_usage_12_0.png" />
+<img alt="../_images/docs_usage_19_0.png" src="../_images/docs_usage_19_0.png" />
 </div>
 </div>
 </section>

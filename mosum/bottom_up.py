@@ -2,96 +2,12 @@ import warnings
 import sys
 import numpy as np
 import pandas as pd
-from matplotlib import pyplot as plt
 
 from mosum.mosum import mosum
 from mosum.mosum_test import pValue
 from mosum.bandwidth import bandwidths_default, multiscale_grid
-
-class multiscale_cpts:
-    """multiscale_cpts object"""
-
-    def __init__(self, x, cpts, cpts_info, pooled_cpts, G,
-                 alpha, threshold, threshold_function, criterion, eta,
-                 do_confint, ci):
-        """init method"""
-        self.x = x
-        self.G = G
-        self.threshold = threshold
-        self.alpha = alpha
-        self.threshold_function = threshold_function
-        self.criterion = criterion
-        self.eta = eta
-        self.cpts = np.array(cpts, int)
-        self.cpts_info = cpts_info
-        self.pooled_cpts = pooled_cpts
-        self.do_confint = do_confint
-        self.ci = ci  # note
-        self.var_est_method = "mosum"
-
-    def plot(self, display=['data', 'mosum'][0], cpts_col='red', critical_value_col='blue', xlab='Time'):
-        """plot method - plots data or detector"""
-        plt.clf()
-        x_plot = np.arange(0,len(self.x))
-        if (display == 'mosum'):
-            plt.plot(x_plot, self.stat, ls='-', color="black")
-            plt.axhline(self.threshold_value, color=critical_value_col)
-        if (display == 'data'):
-            if(len(self.cpts)>0):
-                brks = np.concatenate((0, self.cpts, len(self.x)), axis=None)
-            else:
-                brks = np.array([0, len(self.x)])
-            brks.sort()
-            fhat = self.x * 0
-            for kk in np.arange(0,(len(brks) - 1)):
-                int = np.arange(brks[kk],brks[kk + 1])
-                fhat[int] = np.mean(self.x[int])
-            plt.plot(x_plot, self.x, ls='-', color="black")
-            plt.xlabel(xlab)
-            plt.title("v")
-            plt.plot(x_plot, fhat, color = 'darkgray', ls = '-', lw = 2)
-        for p in self.cpts:
-            plt.axvline(x_plot[p-1]+1, color='red')
-
-
-    def summary(self):
-        """summary method"""
-        n = len(self.x)
-        if (len(self.cpts) > 0):
-            ans = self.cpts_info
-            ans.p_value = round(ans.p_value, 3)
-            ans.jump = round(ans.jump, 3)
-        # if (self.do.confint): ans = pd.DataFrame(ans, self.ci$CI[, -1, drop=FALSE])
-
-        #  cat(paste('created using mosum version ', utils::packageVersion('mosum'), sep=''))
-        out = 'change points detected at alpha = ' + str(self.alpha) + ' according to ' + self.criterion + '-criterion'
-        if (self.criterion == 'eta'): out = out + ' with eta = ' + str(self.eta)
-        if (self.criterion == 'epsilon'): out = out + ' with epsilon = ' + str(self.epsilon)
-        out = out + ' and ' + self.var_est_method + ' variance estimate:'
-        print(out)
-        if (len(self.cpts) > 0):
-            print(ans)
-        else:
-            print('no change point is found')
-
-    def print(self):
-        """print method"""
-        #  cat(paste('created using mosum version ', utils::packageVersion('mosum'), sep=''))
-        n = len(self.x)
-        if (len(self.cpts) > 0):
-            ans = self.cpts_info
-            ans.p_value = round(ans.p_value, 3)
-            ans.jump = round(ans.jump, 3)
-        out = 'change points detected with bandwidths (' + str(self.G) + ',' + str(
-            self.G) + ') at alpha = ' + str(self.alpha) + ' according to ' + self.criterion + '-criterion'
-        if (self.criterion == 'eta'): out = out + (' with eta = ' + str(self.eta))
-        if (self.criterion == 'epsilon'): out = out + (' with epsilon = ' + str(self.epsilon))
-        out = out + (' and ' + self.var_est_method + ' variance estimate:')
-        print(out)
-        if (len(self.cpts) > 0):
-            print(ans)
-        else:
-            print('no change point is found')
+from mosum.classes import multiscale_cpts
+from mosum.bootstrap import confint_multiscale_cpts, confint_mosum_cpts
 
 
 def multiscale_bottomUp(x, G=None, threshold = ['critical_value', 'custom'][0],
@@ -117,14 +33,6 @@ def multiscale_bottomUp(x, G=None, threshold = ['critical_value', 'custom'][0],
     eta : float
         a positive numeric value for the minimal mutual distance of changes,
         relative to moving sum bandwidth (iff 'criterion = "eta"')
-    cpts : int
-        estimated change points
-    cpts_info : DataFrame
-        information on change points
-        self.pooled_cpts = pooled_cpts
-        self.do_confint = do_confint
-        self.ci = ci  # note
-        self.var_est_method = "mosum"
     do_confint : bool
         flag indicating whether to compute the confidence intervals for change points
     level : float
@@ -242,11 +150,12 @@ def multiscale_bottomUp(x, G=None, threshold = ['critical_value', 'custom'][0],
         out = multiscale_cpts(x,cpts, cpts_merged, np.sort(np.unique(cpts_complete)),G,
                           alpha,threshold, threshold_function, 'eta', eta,
                           False, None)  # note
+        if do_confint:
+            out.ci = confint_multiscale_cpts(out, level=level, N_reps=N_reps)
+            out.do_confint = True
     else:
         out = m
-   # if (do.confint) {
-   # ret$ci = confint.multiscale.cpts(ret, level=level, N_reps=N_reps)
-   # ret$do.confint = TRUE
-
+        if do_confint:
+            out.ci = confint_mosum_cpts(out, level=level, N_reps=N_reps)
+            out.do_confint = True
     return out
-

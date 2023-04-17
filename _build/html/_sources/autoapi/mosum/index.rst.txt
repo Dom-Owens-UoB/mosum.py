@@ -18,6 +18,8 @@ Submodules
    bandwidth/index.rst
    bootstrap/index.rst
    bottom_up/index.rst
+   classes/index.rst
+   exhaust_bic/index.rst
    local_prune/index.rst
    mosum/index.rst
    mosum_stat/index.rst
@@ -39,6 +41,7 @@ Functions
    mosum.mosum
    mosum.criticalValue
    mosum.multiscale_bottomUp
+   mosum.multiscale_localPrune
    mosum.bandwidths_default
    mosum.testData
    mosum.persp3D_multiscaleMosum
@@ -147,14 +150,6 @@ Functions
    :param eta: a positive numeric value for the minimal mutual distance of changes,
                relative to moving sum bandwidth (iff 'criterion = "eta"')
    :type eta: float
-   :param cpts: estimated change points
-   :type cpts: int
-   :param cpts_info: information on change points
-                     self.pooled_cpts = pooled_cpts
-                     self.do_confint = do_confint
-                     self.ci = ci  # note
-                     self.var_est_method = "mosum"
-   :type cpts_info: DataFrame
    :param do_confint: flag indicating whether to compute the confidence intervals for change points
    :type do_confint: bool
    :param level: use iff 'do_confint = True'; a numeric value ('0 <= level <= 1') with which '100(1-level)%'
@@ -180,6 +175,88 @@ Functions
    >>> xx_m  = mosum.multiscale_bottomUp(xx, G = [50,100])
    >>> xx_m.summary()
    >>> xx_m.print()
+
+
+.. py:function:: multiscale_localPrune(x, G=None, max_unbalance=4, threshold='critical_value', alpha=0.1, threshold_function=None, criterion='eta', eta=0.4, epsilon=0.2, rule='pval', penalty='log', pen_exp=1.01, do_confint=False, level=0.05, N_reps=1000)
+
+    Multiscale MOSUM algorithm with localised pruning
+
+    Parameters
+    ----------
+    x : list
+        input data
+    G : int
+        vector of bandwidths; given as either integers less than `len(x)/2`,
+         or numbers between `0` and `0.5` describing the moving sum bandwidths relative to `len(x)`
+    max_unbalance : float
+       a numeric value for the maximal ratio between maximal and minimal bandwidths to be used for candidate generation,
+       at least 1
+    threshold : Str
+        indicates which threshold should be used to determine significance.
+        By default, it is chosen from the asymptotic distribution at the given significance level 'alpha`.
+        Alternatively it is possible to parse a user-defined function with 'threshold_function'.
+    alpha : float
+        numeric value for the significance level with '0 <= alpha <= 1';
+        use iff 'threshold = "critical_value"'
+    threshold_function : function
+        criterion : Str
+       indicates how to determine whether each point 'k' at which MOSUM statistic
+       exceeds the threshold is a change point; possible values are
+       'eta' : there is no larger exceeding in an 'eta*G' environment of 'k'
+       'epsilon' : 'k' is the maximum of its local exceeding environment, which has at least size 'epsilon*G'
+   eta : float
+       a positive numeric value for the minimal mutual distance of changes,
+       relative to moving sum bandwidth (iff 'criterion = "eta"')
+   epsilon : float
+       a numeric value in (0,1] for the minimal size of exceeding environments,
+       relative to moving sum bandwidth (iff 'criterion = "epsilon"')
+   rule : Str
+       Choice of sorting criterion for change point candidates in merging step.
+       Possible values are:
+       'pval' : smallest p-value
+       'jump' : largest (rescaled) jump size
+   penalty : Str
+       Type of penalty term to be used in Schwarz criterion; possible values are:
+       'log' : use 'penalty = log(len(x))**pen_exp'
+       'polynomial' : use 'penalty = len(x)**pen_exp'
+   pen_exp : float
+       penalty exponent
+   do_confint : bool
+        flag indicating whether to compute the confidence intervals for change points
+   level : float
+        use iff 'do_confint = True'; a numeric value ('0 <= level <= 1') with which '100(1-level)%'
+        confidence interval is generated
+   N_reps : int
+        use iff 'do.confint = True'; number of bootstrap replicates to be generated
+
+    Returns
+    -------
+    multiscale_cpts object containing
+    x : list
+        input data
+    G : int
+        bandwidth vector
+    threshold, alpha, threshold_function, eta
+        input
+    cpts : ndarray
+        estimated change point
+    cpts_info : DataFrame
+        information on change points, including detection bandwidths, asymptotic p-values, scaled jump sizes
+    pooled_cpts : ndarray
+        change point candidates
+    do_confint : bool
+        input
+    ci
+        confidence intervals
+
+    Examples
+    --------
+    >>> import mosum
+    >>> xx = mosum.testData("mix")["x"]
+    >>> xx_m  = mosum.multiscale_localPrune(xx, G = [8,15,30,70])
+    >>> xx_m.summary()
+    >>> xx_m.print()
+
 
 
 .. py:function:: bandwidths_default(n, d_min=10, G_min=10, G_max=None) -> int

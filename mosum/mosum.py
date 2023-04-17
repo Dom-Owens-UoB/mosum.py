@@ -2,99 +2,11 @@ import mosum
 import numpy as np
 import pandas as pd
 import sys
-from matplotlib import pyplot as plt
 
+from mosum.classes import mosum_obj
 from mosum.mosum_test import criticalValue, pValue
 from mosum.mosum_stat import mosum_stat, eta_criterion_help
-
-
-class mosum_obj:
-    """mosum object"""
-
-    def __init__(self, x, G_left, G_right, var_est_method, var_custom, boundary_extension, stat, unscaledStatistic,
-                 var_estimation,
-                 threshold, alpha, threshold_custom, threshold_value, criterion, eta, epsilon, cpts, cpts_info,
-                 do_confint, ci):
-        """init method"""
-        self.x = x
-        self.G_left = G_left
-        self.G_right = G_right
-        self.var_est_method = var_est_method
-        self.var_custom = var_custom
-        self.boundary_extension = boundary_extension
-        self.stat = stat
-        self.rollsums = unscaledStatistic
-        self.var_estimation = var_estimation
-        self.threshold = threshold
-        self.alpha = alpha
-        self.threshold_custom = threshold_custom
-        self.threshold_value = threshold_value
-        self.criterion = criterion
-        self.eta = eta
-        self.epsilon = epsilon
-        self.cpts = np.array(cpts, int)
-        self.cpts_info = cpts_info
-        self.do_confint = do_confint
-        self.ci = ci  # note
-
-    def plot(self, display=['data', 'mosum'][0], cpts_col='red', critical_value_col='blue', xlab='Time'):
-        """plot method - plots data or detector"""
-        plt.clf()
-        x_plot = np.arange(0,len(self.x))
-        if (display == 'mosum'):
-            plt.plot(x_plot, self.stat, ls='-', color="black")
-            plt.axhline(self.threshold_value, color=critical_value_col)
-        if (display == 'data'):
-            if(len(self.cpts)>0):
-                brks = np.concatenate((0, self.cpts, len(self.x)), axis=None)
-            else:
-                brks = np.array([0, len(self.x)])
-            fhat = self.x * 0
-            for kk in np.arange(0,(len(brks) - 1)):
-                int = np.arange(brks[kk],brks[kk + 1])
-                fhat[int] = np.mean(self.x[int])
-            plt.plot(x_plot, self.x, ls='-', color="black")
-            plt.xlabel(xlab)
-            plt.title("v")
-            plt.plot(x_plot, fhat, color = 'darkgray', ls = '-', lw = 2)
-        for p in self.cpts:
-            plt.axvline(x_plot[(p-1)]+1, color='red')
-
-
-    def summary(self):
-        """summary method"""
-        n = len(self.x)
-        if (len(self.cpts) > 0):
-            ans = self.cpts_info
-            ans.p_value = round(ans.p_value, 3)
-            ans.jump = round(ans.jump, 3)
-        out = 'change points detected at alpha = ' + str(self.alpha) + ' according to ' + self.criterion + '-criterion'
-        if (self.criterion == 'eta'): out = out + ' with eta = ' + str(self.eta)
-        if (self.criterion == 'epsilon'): out = out + ' with epsilon = ' + str(self.epsilon)
-        out = out + ' and ' + self.var_est_method + ' variance estimate:'
-        print(out)
-        if (len(self.cpts) > 0):
-            print(ans)
-        else:
-            print('no change point is found')
-
-    def print(self):
-        """print method"""
-        n = len(self.x)
-        if (len(self.cpts) > 0):
-            ans = self.cpts_info
-            ans.p_value = round(ans.p_value, 3)
-            ans.jump = round(ans.jump, 3)
-        out = 'change points detected with bandwidths (' + str(self.G_left) + ',' + str(
-            self.G_right) + ') at alpha = ' + str(self.alpha) + ' according to ' + self.criterion + '-criterion'
-        if (self.criterion == 'eta'): out = out + (' with eta = ' + str(self.eta))
-        if (self.criterion == 'epsilon'): out = out + (' with epsilon = ' + str(self.epsilon))
-        out = out + (' and ' + self.var_est_method + ' variance estimate:')
-        print(out)
-        if (len(self.cpts) > 0):
-            print(ans)
-        else:
-            print('no change point is found')
+from mosum.bootstrap import confint_mosum_cpts
 
 
 def mosum(x, G, G_right=float("nan"), var_est_method=['mosum', 'mosum_min', 'mosum_max', 'custom'][0],
@@ -220,7 +132,7 @@ def mosum(x, G, G_right=float("nan"), var_est_method=['mosum', 'mosum_min', 'mos
     if criterion == 'epsilon':
         # get number of subsequent exceedings
         ex_len = pd.Series(exceedings)  # rlencode(exceedings)[1]
-        exceedingsCount = np.array(exceedings * pd.Series(ex_len.groupby(ex_len).cumcount().add(1)))
+        exceedingsCount = np.array(exceedings * pd.Series(ex_len.cumsum()-ex_len.cumsum().where(~ex_len).ffill().fillna(0).astype(int)))
         # get exceeding-intervals of fitting length
         minIntervalSize = max([1, (G_min + G_max) / 2 * epsilon])
         intervalEndPoints = np.array(np.where(np.diff(exceedingsCount) <= -minIntervalSize)[0])
@@ -261,7 +173,12 @@ def mosum(x, G, G_right=float("nan"), var_est_method=['mosum', 'mosum_min', 'mos
 
     n_cps = len(changePoints)
     if n_cps == 0:
-        cpts_info = None
+        cpts_info = pd.DataFrame({"cpts": [],
+                                  "G_left": [],
+                                  "G_right": [],
+                                  "p_value": [],
+                                  "jump": []})
+
     else:
         outcps = changePoints.astype(int)
         cpts_info = pd.DataFrame({"cpts": outcps,
@@ -269,13 +186,13 @@ def mosum(x, G, G_right=float("nan"), var_est_method=['mosum', 'mosum_min', 'mos
                                   "G_right": np.full(n_cps, G_right),
                                   "p_value": pValue(m.stat[outcps], n, G_left, G_right),
                                   "jump": np.sqrt((G_left + G_right) / G_left / G_right) * m.stat[outcps]})
-    # if do_confint:
-    #    ret$ci < - confint.mosum.cpts(ret, level=level, N_reps=N_reps)
-    #    ret$do.confint < - TRUE
-    ci = None
+
 
     out = mosum_obj(x, G_left, G_right, var_est_method, var_custom, boundary_extension, m.stat, m.rollsums,
                     m.var_estimation,
                     threshold, alpha, threshold_custom, threshold_val, criterion, eta, epsilon, changePoints, cpts_info,
-                    do_confint, ci)
+                    False, None)
+    if do_confint:
+        out.ci = confint_mosum_cpts(out, level=level, N_reps=N_reps)
+        out.do_confint = True
     return out

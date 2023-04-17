@@ -36,16 +36,6 @@
 <span id="mosum-bottom-up"></span><h1><a class="reference internal" href="#module-mosum.bottom_up" title="mosum.bottom_up"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mosum.bottom_up</span></code></a><a class="headerlink" href="#module-mosum.bottom_up" title="Permalink to this heading">¶</a></h1>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
-<section id="classes">
-<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">¶</a></h3>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#mosum.bottom_up.multiscale_cpts" title="mosum.bottom_up.multiscale_cpts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiscale_cpts</span></code></a></p></td>
-<td><p>multiscale_cpts object</p></td>
-</tr>
-</tbody>
-</table>
-</section>
 <section id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">¶</a></h3>
 <table class="autosummary longtable docutils align-default">
@@ -55,30 +45,6 @@
 </tr>
 </tbody>
 </table>
-<dl class="py class">
-<dt class="sig sig-object py" id="mosum.bottom_up.multiscale_cpts">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mosum.bottom_up.</span></span><span class="sig-name descname"><span class="pre">multiscale_cpts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpts_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pooled_cpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_confint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ci</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.bottom_up.multiscale_cpts" title="Permalink to this definition">¶</a></dt>
-<dd><p>multiscale_cpts object</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="mosum.bottom_up.multiscale_cpts.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['data',</span> <span class="pre">'mosum'][0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpts_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'red'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_value_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Time'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.bottom_up.multiscale_cpts.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>plot method - plots data or detector</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mosum.bottom_up.multiscale_cpts.summary">
-<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mosum.bottom_up.multiscale_cpts.summary" title="Permalink to this definition">¶</a></dt>
-<dd><p>summary method</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mosum.bottom_up.multiscale_cpts.print">
-<span class="sig-name descname"><span class="pre">print</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mosum.bottom_up.multiscale_cpts.print" title="Permalink to this definition">¶</a></dt>
-<dd><p>print method</p>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="mosum.bottom_up.multiscale_bottomUp">
 <span class="sig-prename descclassname"><span class="pre">mosum.bottom_up.</span></span><span class="sig-name descname"><span class="pre">multiscale_bottomUp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['critical_value',</span> <span class="pre">'custom'][0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_confint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_reps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.bottom_up.multiscale_bottomUp" title="Permalink to this definition">¶</a></dt>
@@ -100,12 +66,6 @@ use iff ‘threshold = “critical_value”’</p></li>
 <li><p><strong>threshold_function</strong> (<em>function</em>) – </p></li>
 <li><p><strong>eta</strong> (<em>float</em>) – a positive numeric value for the minimal mutual distance of changes,
 relative to moving sum bandwidth (iff ‘criterion = “eta”’)</p></li>
-<li><p><strong>cpts</strong> (<em>int</em>) – estimated change points</p></li>
-<li><p><strong>cpts_info</strong> (<em>DataFrame</em>) – information on change points
-self.pooled_cpts = pooled_cpts
-self.do_confint = do_confint
-self.ci = ci  # note
-self.var_est_method = “mosum”</p></li>
 <li><p><strong>do_confint</strong> (<em>bool</em>) – flag indicating whether to compute the confidence intervals for change points</p></li>
 <li><p><strong>level</strong> (<em>float</em>) – use iff ‘do_confint = True’; a numeric value (‘0 &lt;= level &lt;= 1’) with which ‘100(1-level)%’
 confidence interval is generated</p></li>

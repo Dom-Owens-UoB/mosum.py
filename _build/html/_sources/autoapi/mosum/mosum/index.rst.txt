@@ -7,14 +7,6 @@
 Module Contents
 ---------------
 
-Classes
-~~~~~~~
-
-.. autoapisummary::
-
-   mosum.mosum.mosum_obj
-
-
 
 Functions
 ~~~~~~~~~
@@ -22,26 +14,6 @@ Functions
 .. autoapisummary::
 
    mosum.mosum.mosum
-
-
-
-.. py:class:: mosum_obj(x, G_left, G_right, var_est_method, var_custom, boundary_extension, stat, unscaledStatistic, var_estimation, threshold, alpha, threshold_custom, threshold_value, criterion, eta, epsilon, cpts, cpts_info, do_confint, ci)
-
-   mosum object
-
-   .. py:method:: plot(display=['data', 'mosum'][0], cpts_col='red', critical_value_col='blue', xlab='Time')
-
-      plot method - plots data or detector
-
-
-   .. py:method:: summary()
-
-      summary method
-
-
-   .. py:method:: print()
-
-      print method
 
 
 

@@ -13,3 +13,5 @@ xx_m.plot(display="mosum")
 #ts.plot()
 plt.show()
 
+xx_m = mosum.multiscale_localPrune(xx, G= [5,40] )
+xx_m
