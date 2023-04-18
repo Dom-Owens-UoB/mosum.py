@@ -1,0 +1,49 @@
+:py:mod:`mosum.mosum_stat`
+==========================
+
+.. py:module:: mosum.mosum_stat
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   mosum.mosum_stat.mosum_stat_obj
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   mosum.mosum_stat.mosum_stat
+   mosum.mosum_stat.rolling_sum
+   mosum.mosum_stat.eta_criterion_help
+
+
+
+.. py:class:: mosum_stat_obj(x, G_left, G_right, var_est_method, var_custom, boundary_extension, res, unscaledStatistic, var_estimation)
+
+   mosum statistic
+
+
+.. py:function:: mosum_stat(x, G, G_right=float('nan'), var_est_method='mosum', var_custom=None, boundary_extension=True) -> mosum_stat_obj
+
+   calculate mosum statistic
+
+
+.. py:function:: rolling_sum(a: float, G: int = 1) -> numpy.ndarray
+
+   calculate rolling sums for mosum detector
+
+
+.. py:function:: eta_criterion_help(candidates: int, m_values: float, eta: float, G_left: int, G_right: int)
+
+   eta localisation
+
+

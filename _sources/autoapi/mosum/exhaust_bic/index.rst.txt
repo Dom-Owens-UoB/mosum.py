@@ -1,0 +1,58 @@
+:py:mod:`mosum.exhaust_bic`
+===========================
+
+.. py:module:: mosum.exhaust_bic
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   mosum.exhaust_bic.get_comb_ind
+   mosum.exhaust_bic.extract_sub
+   mosum.exhaust_bic.start_bit_permutations
+   mosum.exhaust_bic.next_bit_permutation
+   mosum.exhaust_bic.is_child
+   mosum.exhaust_bic.numberOfSetBits
+   mosum.exhaust_bic.comb_contains_cpt
+   mosum.exhaust_bic.get_local_costs
+   mosum.exhaust_bic.setBitNumber
+   mosum.exhaust_bic.exhaust_sc
+
+
+
+.. py:function:: get_comb_ind(active)
+
+
+.. py:function:: extract_sub(cand, x)
+
+
+.. py:function:: start_bit_permutations(l)
+
+
+.. py:function:: next_bit_permutation(v)
+
+
+.. py:function:: is_child(i_child, i_parent)
+
+
+.. py:function:: numberOfSetBits(i: int) -> int
+
+
+.. py:function:: comb_contains_cpt(comb: int, k_ind: int) -> bool
+
+
+.. py:function:: get_local_costs(icomb: int, sub_sums: numpy.ndarray) -> float
+
+
+.. py:function:: setBitNumber(n: int) -> int
+
+
+.. py:function:: exhaust_sc(cand, sub_sums, strength, log_penalty, n, auc, min_cost)
+
+

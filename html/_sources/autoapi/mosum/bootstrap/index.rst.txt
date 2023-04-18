@@ -1,0 +1,54 @@
+:py:mod:`mosum.bootstrap`
+=========================
+
+.. py:module:: mosum.bootstrap
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   mosum.bootstrap.confint_mosum_cpts
+   mosum.bootstrap.confint_multiscale_cpts
+   mosum.bootstrap.cpts_bootstrap
+   mosum.bootstrap.mean_help
+   mosum.bootstrap.get_k_star
+   mosum.bootstrap.bootstrapped_timeSeries
+   mosum.bootstrap.cpts_bootstrap_help
+
+
+
+.. py:function:: confint_mosum_cpts(object, parm: str = 'cpts', level: float = 0.05, N_reps: int = 1000)
+
+
+.. py:function:: confint_multiscale_cpts(object, parm: str = 'cpts', level: float = 0.05, N_reps: int = 1000)
+
+
+.. py:function:: cpts_bootstrap(mcpts, N_reps, level)
+
+
+.. py:function:: mean_help(x, l, r)
+
+   helping function for bootstrap (compute local means)
+
+
+.. py:function:: get_k_star(x_star, k_hat, G_l, G_r, G_ll, G_rr)
+
+   Compute bootstrapped mosum statistic and return maximum position thereof
+
+
+.. py:function:: bootstrapped_timeSeries(cpts, x)
+
+   Obtain bootstrap replicate of time series
+
+
+.. py:function:: cpts_bootstrap_help(cpts_info, x, N_reps)
+
+   Helping function to get bootstrap replicates of change point estimates
+
+

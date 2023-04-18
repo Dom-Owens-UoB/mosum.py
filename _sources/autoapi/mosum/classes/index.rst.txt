@@ -1,0 +1,101 @@
+:py:mod:`mosum.classes`
+=======================
+
+.. py:module:: mosum.classes
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   mosum.classes.mosum_obj
+   mosum.classes.multiscale_cpts
+   mosum.classes.multiscale_cpts_lp
+
+
+
+
+.. py:class:: mosum_obj(x, G_left, G_right, var_est_method, var_custom, boundary_extension, stat, unscaledStatistic, var_estimation, threshold, alpha, threshold_custom, threshold_value, criterion, eta, epsilon, cpts, cpts_info, do_confint, ci)
+
+   mosum object
+
+   .. py:method:: plot(display=['data', 'mosum'][0], cpts_col='red', critical_value_col='blue', xlab='Time')
+
+      plot method - plots data or detector
+
+
+   .. py:method:: summary()
+
+      summary method
+
+
+   .. py:method:: print()
+
+      print method
+
+
+   .. py:method:: confint(parm: str = 'cpts', level: float = 0.05, N_reps: int = 1000)
+
+      Generate bootstrap confidence intervals for change points
+
+      :param parm: unused
+      :type parm: Str
+      :param level: numeric value in (0, 1), such that the `100(1-level)%` confidence bootstrap intervals are computed
+      :type level: float
+      :param N_reps: number of bootstrap replicates
+      :type N_reps: int
+
+      :rtype: dictionary containing inputs, pointwise intervals and uniform intervals
+
+
+
+.. py:class:: multiscale_cpts(x, cpts, cpts_info, pooled_cpts, G, alpha, threshold, threshold_function, criterion, eta, do_confint, ci)
+
+   multiscale_cpts object
+
+   .. py:method:: plot(display=['data', 'mosum'][0], cpts_col='red', critical_value_col='blue', xlab='Time')
+
+      plot method - plots data or detector
+
+
+   .. py:method:: summary()
+
+      summary method
+
+
+   .. py:method:: print()
+
+      print method
+
+
+   .. py:method:: confint(parm: str = 'cpts', level: float = 0.05, N_reps: int = 1000)
+
+      Generate bootstrap confidence intervals for change points
+
+      :param parm: unused
+      :type parm: Str
+      :param level: numeric value in (0, 1), such that the `100(1-level)%` confidence bootstrap intervals are computed
+      :type level: float
+      :param N_reps: number of bootstrap replicates
+      :type N_reps: int
+
+      :rtype: dictionary containing inputs, pointwise intervals and uniform intervals
+
+
+
+.. py:class:: multiscale_cpts_lp(x, cpts, cpts_info, pooled_cpts, G, alpha, threshold, threshold_function, criterion, eta, epsilon, sc, rule, penalty, pen_exp, do_confint, ci)
+
+   Bases: :py:obj:`multiscale_cpts`
+
+   multiscale_cpts object
+
+   .. py:method:: plot(display=['data', 'significance'][0], shaded=['CI', 'bandwidth', 'none'][0], level=0.05, N_reps=1000, CI=['pw', 'unif'][0], xlab='Time')
+
+      plot method - plots data or p-values, shaded according to confidence intervals or detection bandwidth
+
+
+

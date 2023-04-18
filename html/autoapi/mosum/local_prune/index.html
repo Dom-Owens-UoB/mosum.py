@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>mosum.local_prune &#8212; mosum 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-mosum.local_prune">
+<span id="mosum-local-prune"></span><h1><a class="reference internal" href="#module-mosum.local_prune" title="mosum.local_prune"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mosum.local_prune</span></code></a><a class="headerlink" href="#module-mosum.local_prune" title="Permalink to this heading">¶</a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mosum.local_prune.multiscale_localPrune" title="mosum.local_prune.multiscale_localPrune"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiscale_localPrune</span></code></a>(x[, G, max_unbalance, ...])</p></td>
+<td><p>Multiscale MOSUM algorithm with localised pruning</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mosum.local_prune.local_prune" title="mosum.local_prune.local_prune"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_prune</span></code></a>(x, all_cpts, rule, log_penalty, pen_exp)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mosum.local_prune.local_env" title="mosum.local_prune.local_env"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_env</span></code></a>(j, est_cpts_ind, all_cpts, current, ac)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mosum.local_prune.dup_merge" title="mosum.local_prune.dup_merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dup_merge</span></code></a>(all_cpts)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mosum.local_prune.detect_interval" title="mosum.local_prune.detect_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detect_interval</span></code></a>(all_cpts, est_cpts)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.local_prune.multiscale_localPrune">
+<span class="sig-prename descclassname"><span class="pre">mosum.local_prune.</span></span><span class="sig-name descname"><span class="pre">multiscale_localPrune</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_unbalance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'critical_value'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eta'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pval'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'log'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pen_exp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_confint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_reps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.local_prune.multiscale_localPrune" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Multiscale MOSUM algorithm with localised pruning</p>
+<dl>
+<dt>x<span class="classifier">list</span></dt><dd><p>input data</p>
+</dd>
+<dt>G<span class="classifier">int</span></dt><dd><dl class="simple">
+<dt>vector of bandwidths; given as either integers less than <cite>len(x)/2</cite>,</dt><dd><p>or numbers between <cite>0</cite> and <cite>0.5</cite> describing the moving sum bandwidths relative to <cite>len(x)</cite></p>
+</dd>
+</dl>
+</dd>
+<dt>max_unbalance<span class="classifier">float</span></dt><dd><p>a numeric value for the maximal ratio between maximal and minimal bandwidths to be used for candidate generation,
+at least 1</p>
+</dd>
+<dt>threshold<span class="classifier">Str</span></dt><dd><p>indicates which threshold should be used to determine significance.
+By default, it is chosen from the asymptotic distribution at the given significance level ‘alpha`.
+Alternatively it is possible to parse a user-defined function with ‘threshold_function’.</p>
+</dd>
+<dt>alpha<span class="classifier">float</span></dt><dd><p>numeric value for the significance level with ‘0 &lt;= alpha &lt;= 1’;
+use iff ‘threshold = “critical_value”’</p>
+</dd>
+<dt>threshold_function<span class="classifier">function</span></dt><dd><blockquote>
+<div><p>criterion : Str</p>
+</div></blockquote>
+<p>indicates how to determine whether each point ‘k’ at which MOSUM statistic
+exceeds the threshold is a change point; possible values are
+‘eta’ : there is no larger exceeding in an ‘eta*G’ environment of ‘k’
+‘epsilon’ : ‘k’ is the maximum of its local exceeding environment, which has at least size ‘epsilon*G’</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl>
+<dt>eta<span class="classifier">float</span></dt><dd><p>a positive numeric value for the minimal mutual distance of changes,
+relative to moving sum bandwidth (iff ‘criterion = “eta”’)</p>
+</dd>
+<dt>epsilon<span class="classifier">float</span></dt><dd><p>a numeric value in (0,1] for the minimal size of exceeding environments,
+relative to moving sum bandwidth (iff ‘criterion = “epsilon”’)</p>
+</dd>
+<dt>rule<span class="classifier">Str</span></dt><dd><p>Choice of sorting criterion for change point candidates in merging step.
+Possible values are:
+‘pval’ : smallest p-value
+‘jump’ : largest (rescaled) jump size</p>
+</dd>
+<dt>penalty<span class="classifier">Str</span></dt><dd><p>Type of penalty term to be used in Schwarz criterion; possible values are:
+‘log’ : use ‘penalty = log(len(x))**pen_exp’
+‘polynomial’ : use ‘penalty = len(x)**pen_exp’</p>
+</dd>
+<dt>pen_exp<span class="classifier">float</span></dt><dd><p>penalty exponent</p>
+</dd>
+<dt>do_confint<span class="classifier">bool</span></dt><dd><p>flag indicating whether to compute the confidence intervals for change points</p>
+</dd>
+<dt>level<span class="classifier">float</span></dt><dd><p>use iff ‘do_confint = True’; a numeric value (‘0 &lt;= level &lt;= 1’) with which ‘100(1-level)%’
+confidence interval is generated</p>
+</dd>
+<dt>N_reps<span class="classifier">int</span></dt><dd><blockquote>
+<div><p>use iff ‘do.confint = True’; number of bootstrap replicates to be generated</p>
+</div></blockquote>
+<p>multiscale_cpts object containing
+x : list</p>
+<blockquote>
+<div><p>input data</p>
+</div></blockquote>
+<dl class="simple">
+<dt>G<span class="classifier">int</span></dt><dd><p>bandwidth vector</p>
+</dd>
+<dt>threshold, alpha, threshold_function, eta</dt><dd><p>input</p>
+</dd>
+<dt>cpts<span class="classifier">ndarray</span></dt><dd><p>estimated change point</p>
+</dd>
+<dt>cpts_info<span class="classifier">DataFrame</span></dt><dd><p>information on change points, including detection bandwidths, asymptotic p-values, scaled jump sizes</p>
+</dd>
+<dt>pooled_cpts<span class="classifier">ndarray</span></dt><dd><p>change point candidates</p>
+</dd>
+<dt>do_confint<span class="classifier">bool</span></dt><dd><p>input</p>
+</dd>
+<dt>ci</dt><dd><p>confidence intervals</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mosum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xx</span> <span class="o">=</span> <span class="n">mosum</span><span class="o">.</span><span class="n">testData</span><span class="p">(</span><span class="s2">&quot;mix&quot;</span><span class="p">)[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xx_m</span>  <span class="o">=</span> <span class="n">mosum</span><span class="o">.</span><span class="n">multiscale_localPrune</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">70</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xx_m</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xx_m</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.local_prune.local_prune">
+<span class="sig-prename descclassname"><span class="pre">mosum.local_prune.</span></span><span class="sig-name descname"><span class="pre">local_prune</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_cpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_penalty</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pen_exp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.local_prune.local_prune" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.local_prune.local_env">
+<span class="sig-prename descclassname"><span class="pre">mosum.local_prune.</span></span><span class="sig-name descname"><span class="pre">local_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">est_cpts_ind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_cpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ac</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.local_prune.local_env" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.local_prune.dup_merge">
+<span class="sig-prename descclassname"><span class="pre">mosum.local_prune.</span></span><span class="sig-name descname"><span class="pre">dup_merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">all_cpts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.local_prune.dup_merge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mosum.local_prune.detect_interval">
+<span class="sig-prename descclassname"><span class="pre">mosum.local_prune.</span></span><span class="sig-name descname"><span class="pre">detect_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">all_cpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">est_cpts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.local_prune.detect_interval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Dom Owens.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../../../_sources/autoapi/mosum/local_prune/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

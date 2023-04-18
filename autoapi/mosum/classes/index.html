@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>mosum.classes &#8212; mosum 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-mosum.classes">
+<span id="mosum-classes"></span><h1><a class="reference internal" href="#module-mosum.classes" title="mosum.classes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mosum.classes</span></code></a><a class="headerlink" href="#module-mosum.classes" title="Permalink to this heading">¶</a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mosum.classes.mosum_obj" title="mosum.classes.mosum_obj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mosum_obj</span></code></a></p></td>
+<td><p>mosum object</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mosum.classes.multiscale_cpts" title="mosum.classes.multiscale_cpts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiscale_cpts</span></code></a></p></td>
+<td><p>multiscale_cpts object</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mosum.classes.multiscale_cpts_lp" title="mosum.classes.multiscale_cpts_lp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiscale_cpts_lp</span></code></a></p></td>
+<td><p>multiscale_cpts object</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="mosum.classes.mosum_obj">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mosum.classes.</span></span><span class="sig-name descname"><span class="pre">mosum_obj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G_right</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_est_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_custom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_extension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unscaledStatistic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_estimation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_custom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpts_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_confint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ci</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.classes.mosum_obj" title="Permalink to this definition">¶</a></dt>
+<dd><p>mosum object</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mosum.classes.mosum_obj.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['data',</span> <span class="pre">'mosum'][0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpts_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'red'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_value_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Time'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.classes.mosum_obj.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot method - plots data or detector</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mosum.classes.mosum_obj.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mosum.classes.mosum_obj.summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>summary method</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mosum.classes.mosum_obj.print">
+<span class="sig-name descname"><span class="pre">print</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mosum.classes.mosum_obj.print" title="Permalink to this definition">¶</a></dt>
+<dd><p>print method</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mosum.classes.mosum_obj.confint">
+<span class="sig-name descname"><span class="pre">confint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cpts'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_reps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.classes.mosum_obj.confint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate bootstrap confidence intervals for change points</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parm</strong> (<em>Str</em>) – unused</p></li>
+<li><p><strong>level</strong> (<em>float</em>) – numeric value in (0, 1), such that the <cite>100(1-level)%</cite> confidence bootstrap intervals are computed</p></li>
+<li><p><strong>N_reps</strong> (<em>int</em>) – number of bootstrap replicates</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary containing inputs, pointwise intervals and uniform intervals</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mosum.classes.multiscale_cpts">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mosum.classes.</span></span><span class="sig-name descname"><span class="pre">multiscale_cpts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpts_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pooled_cpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_confint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ci</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.classes.multiscale_cpts" title="Permalink to this definition">¶</a></dt>
+<dd><p>multiscale_cpts object</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mosum.classes.multiscale_cpts.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['data',</span> <span class="pre">'mosum'][0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpts_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'red'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_value_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Time'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.classes.multiscale_cpts.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot method - plots data or detector</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mosum.classes.multiscale_cpts.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mosum.classes.multiscale_cpts.summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>summary method</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mosum.classes.multiscale_cpts.print">
+<span class="sig-name descname"><span class="pre">print</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mosum.classes.multiscale_cpts.print" title="Permalink to this definition">¶</a></dt>
+<dd><p>print method</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mosum.classes.multiscale_cpts.confint">
+<span class="sig-name descname"><span class="pre">confint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cpts'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_reps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.classes.multiscale_cpts.confint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate bootstrap confidence intervals for change points</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parm</strong> (<em>Str</em>) – unused</p></li>
+<li><p><strong>level</strong> (<em>float</em>) – numeric value in (0, 1), such that the <cite>100(1-level)%</cite> confidence bootstrap intervals are computed</p></li>
+<li><p><strong>N_reps</strong> (<em>int</em>) – number of bootstrap replicates</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary containing inputs, pointwise intervals and uniform intervals</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mosum.classes.multiscale_cpts_lp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mosum.classes.</span></span><span class="sig-name descname"><span class="pre">multiscale_cpts_lp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpts_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pooled_cpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pen_exp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_confint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ci</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.classes.multiscale_cpts_lp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mosum.classes.multiscale_cpts" title="mosum.classes.multiscale_cpts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiscale_cpts</span></code></a></p>
+<p>multiscale_cpts object</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mosum.classes.multiscale_cpts_lp.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['data',</span> <span class="pre">'significance'][0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shaded</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['CI',</span> <span class="pre">'bandwidth',</span> <span class="pre">'none'][0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_reps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CI</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['pw',</span> <span class="pre">'unif'][0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Time'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mosum.classes.multiscale_cpts_lp.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot method - plots data or p-values, shaded according to confidence intervals or detection bandwidth</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Dom Owens.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../../../_sources/autoapi/mosum/classes/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
