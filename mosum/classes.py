@@ -299,8 +299,9 @@ class multiscale_cpts_lp(multiscale_cpts):
             if q > 0:
                 plt.vlines(x_plot[xx], ymin=plt.ylim()[0], ymax=plt.ylim()[1], colors=cols2, linestyles='dashed')
                 if shaded != 'none':
+                    y1, y2 = plt.ylim()
                     for kk in range(q):
-                        plt.fill_between(x_plot[xx_l[kk]:xx_r[kk]], y1=plt.ylim()[0], y2=plt.ylim()[1], facecolor=cols[kk], alpha=0.2)
+                        plt.fill_between(x_plot[xx_l[kk]:xx_r[kk]], y1=y1, y2=y2, facecolor=cols[kk], alpha=0.2)
         if display == 'significance':
             y_min = max(1 - 1.1 * self.alpha, 0)
             plt.plot(0)
